@@ -87,25 +87,46 @@ function createEcharts() {
 
 }
 
+var typedata={};
+//当前页数
+typedata.currentPage=1;
+//数据个数
+typedata.limit=20;
+typedata.totalCounts=100;
+
+var airtemp=[];
+var airhumi=[];
+var soilhumi1=[];
+var soilhumi2=[];
+var newtime=[];
+
+
+var dom;
+var myChart;
+//空气湿度
+var domair;
+var myChartair;
+
+//首次加载echarts
+function firstloading() {
+     dom = document.getElementById("container");
+     myChart = echarts.init(dom);
+//空气湿度
+     domair = document.getElementById("containerair");
+     myChartair = echarts.init(domair);
+}
 
 
 function  dateCreate(){
-    var dom = document.getElementById("container");
-    var myChart = echarts.init(dom);
-
-    //空气湿度
-    var domair = document.getElementById("containerair");
-    var myChartair = echarts.init(domair);
-
-
-    var typedata={};
 
     //大棚类型
     typedata.hoursetype="大棚1";
-    //数据个数
-    typedata.limit=15;
+
+
     myChart.showLoading();
     myChartair.showLoading();
+
+
     //数据初始化
     $(function () {
         $.ajax({
@@ -118,11 +139,11 @@ function  dateCreate(){
             data:typedata,
             success:function(data){//返回json结果
                 if(data.success==1){
-                    var airtemp=[];
-                    var airhumi=[];
-                    var soilhumi1=[];
-                    var soilhumi2=[];
-                    var newtime=[];
+                    airtemp.splice(0,airtemp.length);
+                    airhumi.splice(0,airhumi.length);
+                    soilhumi1.splice(0,soilhumi1.length);
+                    soilhumi2.splice(0,soilhumi2.length);
+                    newtime.splice(0,newtime.length);
                     for(var i=data.wenshis.length-1;i>=0;i--){
                         airtemp.push(data.wenshis[i].airtemp);
                         airhumi.push(data.wenshis[i].airhumi);
@@ -130,6 +151,9 @@ function  dateCreate(){
                         soilhumi2.push(data.wenshis[i].soilhumi2);
                         newtime.push(data.wenshis[i].newtime);
                     }
+
+                    typedata.totalCounts=data.totalCounts;
+
                     myChart.hideLoading();    //隐藏加载动画
                     myChart.setOption({//加载数据图表
                         title: {
@@ -270,6 +294,10 @@ function  dateCreate(){
                     });
 
 
+                    //分页数据更新
+                    $('#pagination').jqPaginator('option', {
+                        totalCounts: typedata.totalCounts
+                    });
 
 
                 }else if(data.success==0){

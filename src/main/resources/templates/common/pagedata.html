@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<ul class="pagination" id="pagination"></ul>
+<script type="text/javascript">
+    $.jqPaginator('#pagination', {
+//        totalPages: 100,
+        totalCounts:typedata.totalCounts,//数据总条数
+        pageSize:typedata.limit,//页数据大小
+        visiblePages: 10,//最多显示的页码
+        currentPage: 1,
+        first:'<li class="first"><a href="javascript:;">首页</a></li>',
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        last:'<li class="last"><a href="javascript:;">尾页</a></li>',
+        onPageChange: function (num, type) {
+            typedata.currentPage=num;
+            dateCreate();
+        }
+    });
+</script>

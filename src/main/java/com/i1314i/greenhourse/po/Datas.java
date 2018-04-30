@@ -6,7 +6,16 @@ package com.i1314i.greenhourse.po;
  **/
 public class Datas {
     private String hoursetype;
-    private Integer limit;
+    private Integer limit;//每页页码数
+    private Integer currentPage;//当前页码
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
 
     public Integer getLimit() {
         return limit;
@@ -22,5 +31,14 @@ public class Datas {
 
     public void setHoursetype(String hoursetype) {
         this.hoursetype = hoursetype;
+    }
+
+    @Override
+    public String toString() {
+        return "Datas{" +
+                "hoursetype='" + hoursetype + '\'' +
+                ", limit=" + limit +
+                ", currentPage=" + currentPage +
+                '}';
     }
 }

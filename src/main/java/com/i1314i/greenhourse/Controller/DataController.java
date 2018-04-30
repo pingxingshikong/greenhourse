@@ -25,15 +25,25 @@ public class DataController {
     @RequestMapping(value = "/getdata",method = {RequestMethod.POST})
     public JsonResult getWenshiDate(Datas datas)throws Exception{
 
+        System.out.println(datas.toString());
         JsonResult jsonResult=new JsonResult();
-        if(datas.getHoursetype()==null||datas.getHoursetype().trim().equals("")){
+        if(checked(datas)){
+            jsonResult.setSuccess(1);
+            jsonResult.setWenshis(dateService.datalist(datas));
+            jsonResult.setTotalCounts(dateService.totalCounts(datas));
+        }else{
             jsonResult.setSuccess(0);
             jsonResult.setMsg("请求参数错误");
             logger.info("请求参数错误");
-        }else{
-            jsonResult.setSuccess(1);
-            jsonResult.setWenshis(dateService.datalist(datas.getHoursetype(),datas.getLimit()));
+
         }
         return jsonResult;
+    }
+
+    private boolean checked(Datas datas){
+        if(datas.getHoursetype()==null||datas.getHoursetype().trim().equals("")||datas.getLimit()==null||datas.getLimit()==0||datas.getCurrentPage()==null){
+            return false;
+        }
+        return true;
     }
 }

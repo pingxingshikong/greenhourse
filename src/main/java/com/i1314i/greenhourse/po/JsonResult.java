@@ -10,6 +10,15 @@ public class JsonResult {
     private List<Wenshi>wenshis;
     private Integer success;
     private String msg;
+    private Integer totalCounts;//数据总条数
+
+    public Integer getTotalCounts() {
+        return totalCounts;
+    }
+
+    public void setTotalCounts(Integer totalCounts) {
+        this.totalCounts = totalCounts;
+    }
 
     public List<Wenshi> getWenshis() {
         return wenshis;
