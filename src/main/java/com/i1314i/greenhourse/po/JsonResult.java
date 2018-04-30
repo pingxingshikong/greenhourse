@@ -12,6 +12,18 @@ public class JsonResult {
     private String msg;
     private Integer totalCounts;//数据总条数
 
+    private List<Wenshi>rows;
+    private Integer total;//数据总条数
+
+
+    public List<Wenshi> getRows() {
+        return this.wenshis;
+    }
+
+    public Integer getTotal() {
+        return this.totalCounts;
+    }
+
     public Integer getTotalCounts() {
         return totalCounts;
     }

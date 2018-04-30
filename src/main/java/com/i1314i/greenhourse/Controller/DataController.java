@@ -22,7 +22,7 @@ public class DataController {
     @Autowired
     private DateService dateService;
 
-    @RequestMapping(value = "/getdata",method = {RequestMethod.POST})
+    @RequestMapping(value = "/getdata",method = {RequestMethod.POST,RequestMethod.GET})
     public JsonResult getWenshiDate(Datas datas)throws Exception{
 
         System.out.println(datas.toString());

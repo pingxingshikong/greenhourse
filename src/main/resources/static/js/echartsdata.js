@@ -99,7 +99,8 @@ var airhumi=[];
 var soilhumi1=[];
 var soilhumi2=[];
 var newtime=[];
-
+var alldata=[];
+var jsonData={};
 
 var dom;
 var myChart;
@@ -109,6 +110,9 @@ var myChartair;
 
 //首次加载echarts
 function firstloading() {
+
+    tableLoading();
+
      dom = document.getElementById("container");
      myChart = echarts.init(dom);
 //空气湿度
@@ -118,6 +122,7 @@ function firstloading() {
 
 
 function  dateCreate(){
+
 
     //大棚类型
     typedata.hoursetype="大棚1";
@@ -151,6 +156,14 @@ function  dateCreate(){
                         soilhumi2.push(data.wenshis[i].soilhumi2);
                         newtime.push(data.wenshis[i].newtime);
                     }
+
+                    $.each(data.wenshis, function(i, d) {
+
+                        alldata.push(d);
+                        // alert(obj.coursename);
+                    });
+
+
 
                     typedata.totalCounts=data.totalCounts;
 
@@ -300,12 +313,16 @@ function  dateCreate(){
                     });
 
 
+                    $("#table").bootstrapTable('refresh');
+
                 }else if(data.success==0){
                     alert(data.msg);
                 }
 
             }
         });
+
+
     });
 
 
