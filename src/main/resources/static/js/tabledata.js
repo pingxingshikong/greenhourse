@@ -1,9 +1,11 @@
-function tableLoading() {
+function tableLoading(hoursetype) {
+
+
     $("#table").bootstrapTable({ // 对应table标签的id
         url: '/getdata', // 获取表格数据的url
         method: 'get',                      //请求方式（*）
         dataType: "json",
-        cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+        cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默s认为true
         striped: true,  //表格显示条纹，默认为false
         pagination: true, // 在表格底部显示分页组件，默认false
         pageList: [5, 10, 20, 50], // 设置页面可以显示的数据条数
@@ -18,7 +20,7 @@ function tableLoading() {
 
                 limit:params.limit,
                 currentPage:params.offset+1,
-                hoursetype: "大棚1"
+                hoursetype: hoursetype
 
 
             }

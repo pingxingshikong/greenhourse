@@ -23,4 +23,9 @@ public class IndexController {
     public String login(Model model, HttpServletRequest request)throws Exception{
         return "login";
     }
+    @RequestMapping("/data/index2")
+    public String Index2(Model model, HttpServletRequest request)throws Exception{
+        return "index2";
+    }
+
 }

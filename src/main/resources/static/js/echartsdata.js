@@ -87,20 +87,7 @@ function createEcharts() {
 
 }
 
-var typedata={};
-//当前页数
-typedata.currentPage=1;
-//数据个数
-typedata.limit=20;
-typedata.totalCounts=100;
 
-var airtemp=[];
-var airhumi=[];
-var soilhumi1=[];
-var soilhumi2=[];
-var newtime=[];
-var alldata=[];
-var jsonData={};
 
 var dom;
 var myChart;
@@ -109,9 +96,12 @@ var domair;
 var myChartair;
 
 //首次加载echarts
-function firstloading() {
+function firstloading(hoursetype) {
 
-    tableLoading();
+    // alert(hoursetype);
+    //alert(hoursetype);
+
+    tableLoading(hoursetype);
 
      dom = document.getElementById("container");
      myChart = echarts.init(dom);
@@ -121,11 +111,25 @@ function firstloading() {
 }
 
 
-function  dateCreate(){
+function  dateCreate(hoursetype){
 
+    var typedata={};
+//当前页数
+    typedata.currentPage=1;
+//数据个数
+    typedata.limit=20;
+    typedata.totalCounts=100;
+
+    var airtemp=[];
+    var airhumi=[];
+    var soilhumi1=[];
+    var soilhumi2=[];
+    var newtime=[];
+    var alldata=[];
+    var jsonData={};
 
     //大棚类型
-    typedata.hoursetype="大棚1";
+    typedata.hoursetype=hoursetype;
 
 
     myChart.showLoading();
@@ -311,8 +315,8 @@ function  dateCreate(){
                     $('#pagination').jqPaginator('option', {
                         totalCounts: typedata.totalCounts
                     });
-
-
+                    // $("#table").bootstrapTable('destroy');
+                    // tableLoading(hoursetype);
                     $("#table").bootstrapTable('refresh');
 
                 }else if(data.success==0){
